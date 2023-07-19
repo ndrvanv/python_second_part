@@ -52,7 +52,8 @@ wallet = 1500
 currency = 'rub'
 name_wallet = 'Ivanov Ivan Ivanovich'
 
-def cash_withdrawal(money_for_cash: int, wallet: int):
+def cash_withdrawal(money_for_cash: int, wallets: int):
+    global wallet
     if money_for_cash < 100:
         return 'Сумма снятия должна быть кратна сумме 100 рублей'
     if wallet < money_for_cash:
@@ -63,17 +64,21 @@ def cash_withdrawal(money_for_cash: int, wallet: int):
 
 
 def cash_depositing(count: int):
+    global wallet
     money = int(input('Введите сумму которую вы хотите попольнить на карту: '))
     count = count + money
     return count
 
 def switch_case():
+    global wallet
     way = int(input("Выберите какую операцию вы бы хотели произвести:\n1) - Снятие наличных\n2) - Внесение средств на картрасчет:\n"))
     match way:
         case 1:
-            cash_withdrawal(int(input('Введите сумму для снятия наличных ')), wallet)
+            print(cash_withdrawal(int(input('Введите сумму для снятия наличных ')), wallet))
+            print(f'Ваш остаток на счету {name_wallet} {wallet} {currency}')
             return
         case 2:
-            cash_depositing(wallet)
+            print(cash_depositing(wallet))
+            print(f'Ваш остаток на счету {wallet} {currency}')
 
 switch_case()
